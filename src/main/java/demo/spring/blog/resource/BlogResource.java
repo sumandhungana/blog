@@ -16,9 +16,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 /**
  * @author suman dhungana
@@ -33,6 +35,7 @@ public class BlogResource {
     private final EditBlogUseCase editBlogUseCase;
     private final GetAllBlogUseCase getAllBlogUseCase;
     private final DeleteBlogUseCase deleteBlogUseCase;
+    Logger logger = Logger.getLogger(BlogResource.class.getName());
 
 
     @Autowired
@@ -47,8 +50,9 @@ public class BlogResource {
     }
 
     @PostMapping("/blogs")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('MODERATOR') or hasRole('ROLEADMIN')")
     public ResponseEntity<Optional<AddBlogUseCaseResponse>> createBlogs(@RequestBody AddBlogUseCaseRequestPayload payload) {
-        System.out.println("Inside here");
+        logger.info("Inside here");
         var request = BlogConverter.toRequest(payload);
         var response = this.addBlogUseCase.execute(request);
         if (response.isEmpty()) {
