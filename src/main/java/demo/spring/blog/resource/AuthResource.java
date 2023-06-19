@@ -1,12 +1,12 @@
 package demo.spring.blog.resource;
 
-import demo.spring.blog.resource.payload.request.LoginRequest;
-import demo.spring.blog.resource.payload.request.SignupRequest;
 import demo.spring.blog.model.ERole;
 import demo.spring.blog.model.Role;
 import demo.spring.blog.model.User;
 import demo.spring.blog.repository.RoleRepository;
 import demo.spring.blog.repository.UserRepository;
+import demo.spring.blog.resource.payload.request.LoginRequest;
+import demo.spring.blog.resource.payload.request.SignupRequest;
 import demo.spring.blog.resource.payload.response.JwtResponse;
 import demo.spring.blog.resource.payload.response.MessageResponse;
 import demo.spring.blog.security.jwt.JwtUtils;
